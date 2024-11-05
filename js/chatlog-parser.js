@@ -240,7 +240,7 @@
             return formatSmsMessage(line);
         }
         if (lowerLine.includes("you've set your main phone to")) return formatPhoneSet(line);
-        if (/\([^\)]+\) Chamada recebida de .+/.test(line)) {
+        if (/\*\* Seu .+ está tocando \(PH: .+\)/.test(line)) {
             return formatIncomingCall(line);
         }
         if (lowerLine === 'sua chamada foi atendida.') {
@@ -376,20 +376,15 @@
     }
 
     function formatIncomingCall(line) {
-        // Remove qualquer colchete
-        line = line.replace(/[\[\]]/g, '');
-    
-        // Extrair as informações (qualquer coisa entre parênteses)
-        const match = line.match(/\(([^)]+)\) Chamada recebida de (.+)\. Use (.+) para atender ou (.+) para recusar\./);
+        // Extrair informações com base no formato
+        const match = line.match(/\*\* Seu (.+) está tocando \(PH: (.+)\)/);
         if (match) {
-            const parenthetical = match[1];
-            const caller = match[2];
-            const pickupCommand = match[3];
-            const hangupCommand = match[4];
+            const device = match[1];
+            const parenthetical = match[2];
     
-            return '<span class="yellow">(' + parenthetical + ')</span> <span class="white">Chamada recebida de </span><span class="yellow">' + caller + '</span><span class="white">. Use ' + pickupCommand + ' para atender ou ' + hangupCommand + ' para recusar.</span>';
+            return '<span class="white">** Seu </span><span class="yellow">' + device + '</span><span class="white"> está tocando (PH: ' + parenthetical + ')</span>';
         } else {
-            // Se não corresponder, apenas remove colchetes e envolve em branco
+            // Se não corresponder, apenas envolve a linha em branco
             return '<span class="white">' + line + '</span>';
         }
     }

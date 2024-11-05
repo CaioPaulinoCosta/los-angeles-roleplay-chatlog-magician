@@ -252,6 +252,9 @@
         if (lowerLine === 'a outra parte recusou a chamada.') {
             return wrapSpan('white', line);
         }
+        if (lowerLine === 'a outra parte desligou a chamada.') {
+            return wrapSpan('yellow', line);
+        }
         if (lowerLine.startsWith("[info]")) return colorInfoLine(line);
         if (lowerLine.includes("[ch: vts - vessel traffic service]")) return formatVesselTraffic(line);
         if (/\[[^\]]+ -> [^\]]+\]/.test(line)) return wrapSpan("depColor", line);

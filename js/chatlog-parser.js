@@ -281,12 +281,9 @@
         if (lowerLine.startsWith("você largou")) return wrapSpan("death", line);
         if (lowerLine.startsWith("use /phonecursor")) return formatPhoneCursor(line);
         if (lowerLine.includes("has shown you their")) return formatShown(line);
-        if (
-            lowerLine.includes("você enviou sua localização com sucesso")
-        )
-            return wrapSpan("green", line);
-        if (lowerLine.includes("você recebeu uma localização de"))
-            return colorLocationLine(line);
+        if (lowerLine.includes("você enviou sua localização com sucesso"))return wrapSpan("green", line);
+        if (lowerLine.includes("agora suas mensagens ic estarão em tom baixo"))return wrapSpan("green", line);
+        if (lowerLine.includes("você recebeu uma localização de"))return colorLocationLine(line);
         if (
             lowerLine.includes("você entregou") ||
             lowerLine.includes("pagou") ||

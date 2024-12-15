@@ -243,10 +243,7 @@
         if (/\*\* Seu .+ está tocando \(PH: .+\)/.test(line)) {
             return formatIncomingCall(line);
         }
-        if (lowerLine === 'Você atendeu a chamda de') {
-            return wrapSpan('yellow', line);
-        }
-        if (lowerLine === 'sua chamada foi atendida.') {
+        if (lowerLine === 'sua chamada foi atendida.') {    
             return wrapSpan('yellow', line);
         }
         if (lowerLine === 'você desligou a chamada.') {
@@ -272,6 +269,8 @@
         )
             return handleGoods(line);
         if (lowerLine.includes("[megaphone]:")) return wrapSpan("yellow", line);
+        if (lowerLine.includes("[celular] você atendeu a ligação de")) return wrapSpan("yellow", line);
+        if (lowerLine.includes("[celular] você desligou a ligação de")) return wrapSpan("yellow", line);
         if (lowerLine.startsWith("info:")) return formatInfo(line);
         if (lowerLine.includes("you have received $")) return colorMoneyLine(line);
         if (lowerLine.includes("[drug lab]")) return formatDrugLab();

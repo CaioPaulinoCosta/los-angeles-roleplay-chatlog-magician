@@ -243,6 +243,9 @@
         if (/\*\* Seu .+ está tocando \(PH: .+\)/.test(line)) {
             return formatIncomingCall(line);
         }
+        if (lowerLine === 'Você atendeu a chamda de') {
+            return wrapSpan('yellow', line);
+        }
         if (lowerLine === 'sua chamada foi atendida.') {
             return wrapSpan('yellow', line);
         }
